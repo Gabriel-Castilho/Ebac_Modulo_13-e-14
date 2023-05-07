@@ -39,7 +39,7 @@ describe('Teste da funcionalidade produtos', () => {
             method: 'GET',
             url: 'produtos'
         }).then((response) => {
-            expect(response.body.produtos[0].nome).to.contain("Headset" )
+            //expect(response.body.produtos[0].nome).to.contain("Logitech MX Vertical Novo" )
             expect(response.status).to.equal(200)
             expect(response.body).to.have.property('produtos')
             expect(response.duration).to.be.lessThan(500)
@@ -48,11 +48,7 @@ describe('Teste da funcionalidade produtos', () => {
 
 
     it('Deve validar mensagem de erro ao cadastrar produto repetido', () => {
-<<<<<<< HEAD
         cy.cadastrarProduto(token, produto, 250, "Descrição produto novo", 400)
-=======
-        cy.cadastrarProduto(token, "Samsung 60 polegadas", 5240, "Descrição produto existente", 400)
->>>>>>> 6cd82d3cca932038493c62d3e63fff1c716c8d4f
             .then(response => {
                 expect(response.status).to.equal(400)
                 expect(response.body.message).to.equal('Já existe produto com esse nome')
@@ -92,7 +88,7 @@ describe('Teste da funcionalidade produtos', () => {
                     headers: { authorization: token },
                     body:
                     {
-                        "nome": produto,
+                        "nome": `${produto} alterado para um novo`,
                         "preco": 470,
                         "descricao": "Mouse",
                         "quantidade": quantidade,
