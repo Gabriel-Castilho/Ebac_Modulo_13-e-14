@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clonar repositorio') {
             steps {
-                git branch: 'master', url: 'https://github.com/Gabriel-Castilho/Ebac_Modulo_13-e-14'
+                git branch: 'master', url: 'https://github.com/Gabriel-Castilho/Testes-Automatizados-API-Jenkins'
             }
         }
         stage('Instalar dependencias') {
