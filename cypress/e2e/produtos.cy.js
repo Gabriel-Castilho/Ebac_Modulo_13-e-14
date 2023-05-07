@@ -6,6 +6,7 @@ describe('Teste da funcionalidade produtos', () => {
     let token
     let email = `usuario.admin${Math.floor(Math.random() * 1000)}@email.com.br`
     let senha = "senha123"
+    let produto = `Headset Gamer modelo ${Math.floor(Math.random() * 1000000)}`
     before(() => {
 
         cy.cadastrarUsuario("Usuario Admin", email, senha, "true").then(response => {
@@ -25,28 +26,29 @@ describe('Teste da funcionalidade produtos', () => {
         })
     })
 
-    it('Listar produtos', () => {
-        cy.request({
-            method: 'GET',
-            url: 'produtos'
-        }).then((response) => {
-            expect(response.body.produtos[0].nome).to.contain("Logitech")
-            expect(response.status).to.equal(200)
-            expect(response.body).to.have.property('produtos')
-            expect(response.duration).to.be.lessThan(500)
-        })
-    });
-
     it('Cadastrar produto', () => {
-        let produto = `Headset Gamer modelo ${Math.floor(Math.random() * 1000000)}`
+       
         cy.cadastrarProduto(token, produto, 200, "Descrição do produto novo inserido", 400).then(response => {
             expect(response.status).to.equal(201)
             expect(response.body.message).to.equal('Cadastro realizado com sucesso')
         })
     });
 
+    it('Listar produtos', () => {
+        cy.request({
+            method: 'GET',
+            url: 'produtos'
+        }).then((response) => {
+            expect(response.body.produtos[0].nome).to.contain("Headset" )
+            expect(response.status).to.equal(200)
+            expect(response.body).to.have.property('produtos')
+            expect(response.duration).to.be.lessThan(500)
+        })
+    });
+
+
     it('Deve validar mensagem de erro ao cadastrar produto repetido', () => {
-        cy.cadastrarProduto(token, "Headset Gamer Xyperx Cloud", 250, "Descrição produto novo", 400)
+        cy.cadastrarProduto(token, produto, 250, "Descrição produto novo", 400)
             .then(response => {
                 expect(response.status).to.equal(400)
                 expect(response.body.message).to.equal('Já existe produto com esse nome')
@@ -63,7 +65,7 @@ describe('Teste da funcionalidade produtos', () => {
                 headers: { authorization: token },
                 body:
                 {
-                    "nome": "Logitech MX Vertical editado",
+                    "nome": "Logitech MX Vertical novo",
                     "preco": 470,
                     "descricao": "Mouse",
                     "quantidade": quantidade,
