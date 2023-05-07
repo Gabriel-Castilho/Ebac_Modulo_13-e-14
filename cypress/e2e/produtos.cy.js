@@ -48,7 +48,11 @@ describe('Teste da funcionalidade produtos', () => {
 
 
     it('Deve validar mensagem de erro ao cadastrar produto repetido', () => {
+<<<<<<< HEAD
         cy.cadastrarProduto(token, produto, 250, "Descrição produto novo", 400)
+=======
+        cy.cadastrarProduto(token, "Samsung 60 polegadas", 5240, "Descrição produto existente", 400)
+>>>>>>> 6cd82d3cca932038493c62d3e63fff1c716c8d4f
             .then(response => {
                 expect(response.status).to.equal(400)
                 expect(response.body.message).to.equal('Já existe produto com esse nome')
