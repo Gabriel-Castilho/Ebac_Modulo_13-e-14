@@ -1,4 +1,4 @@
-# Testes automatizados de API utilizando Cypress
+# Testes automatizados de API utilizando Cypress e com Jenkins
 
 Utilizando cypress foram feitos testes automatizados na API online do https://serverest.dev/#/
 
